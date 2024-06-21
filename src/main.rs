@@ -34,32 +34,32 @@ fn main() {
 
     loop {
         println!("{}", "Please enter the city:".green());
-        let mut city = String::new();
-        io::stdin().read_line(&mut city).expect("Failed to read line");
-        let city = city.trim();
+        let city = get_input();
 
         println!("{}", "Please enter the country code: (e.g. US, UK, IN, BR)".green());
-        let mut country = String::new();
-        io::stdin().read_line(&mut country).expect("Failed to read line");
-        let country = country.trim();
+        let country = get_input();
 
         let api_key = env::var("WEATHER_API_TOKEN").expect("WEATHER_API_TOKEN is not set");
 
-        match get_weather(city, country, api_key.as_str()) {
+        match get_weather(city.as_str(), country.as_str(), api_key.as_str()) {
             Ok(response) => display_weather(&response),
             Err(error) => println!("Error: {}", error),
         }
 
         println!("{}", "Do you want to check another city? (y/n)".green());
-        let mut answer = String::new();
-        io::stdin().read_line(&mut answer).expect("Failed to read line");
-        let answer = answer.trim().to_lowercase();
+        let answer = get_input().to_lowercase();
 
         if answer != "yes" && answer != "y" {
             println!("{}", "Goodbye! 😊".green());
             break;
         }
     }
+}
+
+fn get_input() -> String {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to read line");
+    input.trim().to_string()
 }
 
 fn get_weather(
