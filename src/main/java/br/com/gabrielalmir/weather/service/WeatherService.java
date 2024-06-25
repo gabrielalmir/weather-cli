@@ -41,8 +41,7 @@ public class WeatherService {
             body = response.body();
         }
 
-        var weather = gson.fromJson(body.string(), ApiWeatherSerializer.class);
-
-        return weather;
+        assert body != null;
+        return gson.fromJson(body.string(), ApiWeatherSerializer.class);
     }
 }
