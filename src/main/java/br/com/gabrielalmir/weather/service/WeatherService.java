@@ -35,9 +35,12 @@ public class WeatherService {
     ApiWeatherSerializer getWeatherResponse(String city, String country) throws IOException {
         var url = "http://api.openweathermap.org/data/2.5/weather?q=%s,%s&units=metric&appid=%s".formatted(city, country, apiKey);
         var request = new Request.Builder().url(url).build();
-        var response = httpClient.newCall(request).execute();
+        okhttp3.ResponseBody body;
 
-        var body = response.body();
+        try (var response = httpClient.newCall(request).execute()) {
+            body = response.body();
+        }
+
         var weather = gson.fromJson(body.string(), ApiWeatherSerializer.class);
 
         return weather;

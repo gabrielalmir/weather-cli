@@ -3,12 +3,12 @@ package br.com.gabrielalmir.weather.entity;
 import java.util.Locale;
 
 public class Weather {
-    private String name;
-    private String description;
-    private Double temperature;
-    private Double humidity;
-    private Double pressure;
-    private Double windSpeed;
+    private final String name;
+    private final String description;
+    private final Double temperature;
+    private final Double humidity;
+    private final Double pressure;
+    private final Double windSpeed;
 
     public Weather(String name, String description, Double temperature, Double humidity, Double pressure, Double windSpeed) {
         this.name = name;
