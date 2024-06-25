@@ -36,7 +36,7 @@ public class Main {
                 continue;
             }
 
-            // ask if needs to continue
+            // ask if it needs to continue
             System.out.println("Do you want to check another city? (y/n) ");
             var answer = sc.nextLine().trim().toLowerCase();
 
